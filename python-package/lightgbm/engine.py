@@ -463,6 +463,7 @@ def cv(params, train_set, num_boost_round=100,
                                     evaluation_result_list=None))
         cvfolds.update(fobj=fobj)
         res = _agg_cv_result(cvfolds.eval_valid(feval))
+        print(res)
         for _, key, mean, _, std in res:
             results[key + '-mean'].append(mean)
             results[key + '-stdv'].append(std)

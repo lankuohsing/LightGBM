@@ -8,8 +8,6 @@ environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       COMPILER: MSVC
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      COMPILER: MINGW
 
 clone_depth: 50
 

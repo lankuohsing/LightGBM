@@ -889,6 +889,11 @@ class Dataset(object):
                     # construct subset
                     used_indices = list_to_1d_numpy(self.used_indices, np.int32, name='used_indices')
                     assert used_indices.flags.c_contiguous
+                    if self.group is not None:
+                        group_info = np.array(self.group).astype(int)
+                        _, self.group = np.unique(np.repeat(range_(len(group_info)), repeats=group_info)[self.used_indices], return_counts=True)
+
+
                     self.handle = ctypes.c_void_p()
                     params_str = param_dict_to_str(self.params)
                     _safe_call(_LIB.LGBM_DatasetGetSubset(
@@ -960,7 +965,7 @@ class Dataset(object):
         """
         if params is None:
             params = self.params
-        ret = Dataset(None, reference=self, feature_name=self.feature_name,
+        ret = Dataset(None, reference=self, feature_name=self.feature_name, group=self.group,
                       categorical_feature=self.categorical_feature, params=params)
         ret._predictor = self._predictor
         ret.pandas_categorical = self.pandas_categorical
@@ -1511,6 +1516,7 @@ class Booster(object):
             self.handle,
             data.construct().handle))
         self.valid_sets.append(data)
+        print(data.get_group())
         self.name_valid_sets.append(name)
         self.__num_dataset += 1
         self.__inner_predict_buffer.append(None)

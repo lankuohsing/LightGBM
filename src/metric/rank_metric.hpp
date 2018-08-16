@@ -140,6 +140,7 @@ public:
       }
       result[j] /= sum_query_weights_;
     }
+	Log::Info(result.c_str());
     return result;
   }
 
