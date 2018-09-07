@@ -25,13 +25,14 @@ import lightgbm as lgb
 # create dataset for lightgbm
 lgb_train = lgb.Dataset(X_train, y_train)
 lgb_eval = lgb.Dataset(X_test, y_test, reference=lgb_train)
+
 # In[]
 # specify your configurations as a dict
 params = {
     'task': 'train',
     'boosting_type': 'gbdt',
     'objective': 'multiclass',
-    'metric': {'multi_error'},
+    'metric': 'multi_logloss',
     #'num_leaves': 31,
     #'learning_rate': 0.05,
     #'feature_fraction': 0.9,
@@ -57,4 +58,4 @@ print('Start predicting...')
 # predict
 y_pred_lgb = gbm.predict(X_test, num_iteration=gbm.best_iteration)
 # eval
-print('The rmse of prediction is:', accuracy_score(y_test, y_pred_lgb))
+#print('The rmse of prediction is:', accuracy_score(y_test, y_pred_lgb))
