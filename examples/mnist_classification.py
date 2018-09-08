@@ -6,7 +6,7 @@ Created on Mon Aug 20 16:53:58 2018
 """
 
 # In[]
-
+from sklearn.datasets import load_digits
 import pandas as pd
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import GridSearchCV
@@ -14,13 +14,15 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import  make_classification
 from sklearn.metrics import accuracy_score
+import numpy as np 
+from sklearn.model_selection import KFold,StratifiedKFold
 # In[]
 # 加载数据
-from sklearn.datasets import load_digits
 digits=load_digits()
 print(digits.data.shape)
 data=digits.data
 target = digits.target
+
 X_train,X_test,y_train,y_test =train_test_split(data,target,test_size=0.2)
 
 
