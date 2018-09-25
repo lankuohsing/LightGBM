@@ -75,6 +75,8 @@ clf_lgb = lgb.LGBMClassifier(application='multiclass',boosting='gbdt',max_depth=
 
 # In[]
 clf_lgb.fit(X_train, y_train,eval_set=[(X_test, y_test)])
+from sklearn.externals import joblib
+joblib.dump(clf_lgb,'gbm.pkl')
 # In[]
 print('Start predicting...')
 # 测试机预测
