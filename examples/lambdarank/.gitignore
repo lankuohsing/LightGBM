@@ -1,2 +1,6 @@
 *.txt
-/Fold1
+/Fold1/*
+*.train
+*.test
+*.query
+
