@@ -1,6 +1,6 @@
-*.txt
-/Fold1/*
-*.train
-*.test
-*.query
+#*.txt
+#/Fold1/*
+#*.train
+#*.test
+#*.query
 
