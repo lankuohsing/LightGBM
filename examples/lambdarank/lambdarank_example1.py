@@ -45,7 +45,7 @@ print('Start training...')
 # train
 gbm = lgb.train(params,
                 lgb_train)
-gbm.save_model("lambdarank_example_model1.txt")
+gbm.booster_.save_model("lambdarank_example_model1.txt")
 # In[]
 print('Start predicting...')
 # predict

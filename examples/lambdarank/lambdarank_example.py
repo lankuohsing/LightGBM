@@ -44,4 +44,4 @@ print('Start predicting...')
 # predict
 prob_pred_lgb = gbm.predict(X_test,config="predict.conf")
 # In[]
-gbm.save_model("lambdarank_example_model.txt")
+gbm.booster_.save_model("lambdarank_example_model.txt")
