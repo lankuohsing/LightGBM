@@ -3,7 +3,10 @@
 
 int main(int argc, char** argv) {
   try {
-    LightGBM::Application app(argc, argv);
+	  char aa[2][200] = { "D:/Projects/github/LightGBM/windows/x64/Release/lightgbm.exe","config=D:/Projects/github/LightGBM/windows/x64/Release/train.conf" };
+	  int ac = 2;
+	  char *pp [2] = { aa[0],aa[1] };
+    LightGBM::Application app(ac, pp);
     app.Run();
   }
   catch (const std::exception& ex) {

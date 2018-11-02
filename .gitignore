@@ -382,3 +382,12 @@ lightgbm.model
 # duplicate version file
 python-package/lightgbm/VERSION.txt
 .Rproj.user
+
+
+
+# files
+*.txt
+*.conf
+*.test
+*.query
+*.train

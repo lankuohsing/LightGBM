@@ -24,7 +24,7 @@
 #include <string>
 #include <utility>
 #include <vector>
-
+#include<iostream>
 namespace LightGBM {
 
 Application::Application(int argc, char** argv) {
@@ -55,6 +55,7 @@ void Application::LoadParameters(int argc, char** argv) {
   // read parameters from config file
   if (params.count("config") > 0) {
     TextReader<size_t> config_reader(params["config"].c_str(), false);
+	std::cout << params["config"] << std::endl;
     config_reader.ReadAllLines();
     if (!config_reader.Lines().empty()) {
       for (auto& line : config_reader.Lines()) {
@@ -63,6 +64,7 @@ void Application::LoadParameters(int argc, char** argv) {
           line.erase(line.find_first_of("#"));
         }
         line = Common::Trim(line);
+		//std::cout << line << std::endl;
         if (line.size() == 0) {
           continue;
         }
