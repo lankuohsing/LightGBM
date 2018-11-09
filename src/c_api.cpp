@@ -369,29 +369,46 @@ const char* LGBM_GetLastError() {
   return LastErrorMsg();
 }
 
+/*!
+* \brief load data set from file like the command_line LightGBM do
+* \param filename the name of the file
+* \param parameters additional parameters
+* \param reference used to align bin mapper with other dataset, nullptr means don't used
+* \param out a loaded dataset
+* \return 0 when succeed, -1 when failure happens
+*/
 int LGBM_DatasetCreateFromFile(const char* filename,
                                const char* parameters,
                                const DatasetHandle reference,
                                DatasetHandle* out) {
   API_BEGIN();
-  auto param = Config::Str2Map(parameters);
+  Dataset *dataset1;
+  auto param = Config::Str2Map(parameters);//½«
   Config config;
   config.Set(param);
   if (config.num_threads > 0) {
     omp_set_num_threads(config.num_threads);
   }
   DatasetLoader loader(config,nullptr, 1, filename);
-  if (reference == nullptr) {
-    if (Network::num_machines() == 1) {
-      *out = loader.LoadFromFile(filename, "");
-    } else {
+  if (reference == nullptr) 
+  {
+    if (Network::num_machines() == 1) 
+	{
+		dataset1= loader.LoadFromFile( filename, "" );
+      //*out = loader.LoadFromFile(filename, "");//Dataset *
+		*out = dataset1;
+    } 
+	else 
+	{
       *out = loader.LoadFromFile(filename, "", Network::rank(), Network::num_machines());
     }
-  } else {
-    *out = loader.LoadFromFileAlignWithOtherDataset(filename, "",
-                                                    reinterpret_cast<const Dataset*>(reference));
+  } 
+  else 
+  {
+    *out = loader.LoadFromFileAlignWithOtherDataset(filename, "",reinterpret_cast<const Dataset*>(reference));
   }
   API_END();
+  //return 0;
 }
 
 

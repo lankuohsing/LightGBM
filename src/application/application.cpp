@@ -45,30 +45,31 @@ Application::~Application() {
   }
 }
 
+/*! \brief Load parameters from command line and config file*/
 void Application::LoadParameters(int argc, char** argv) {
-  std::unordered_map<std::string, std::string> params;
-  for (int i = 1; i < argc; ++i) {
+  std::unordered_map<std::string, std::string> params;//params是存放命令行参数的map
+  for (int i = 1; i < argc; ++i) {//因为第一个参数（i=0)默认是exe的名称，因此只需从第二个参数（i=1)开始，将其放入params中即可
     Config::KV2Map(params, argv[i]);
   }
   // check for alias
   ParameterAlias::KeyAliasTransform(&params);
   // read parameters from config file
   if (params.count("config") > 0) {
-    TextReader<size_t> config_reader(params["config"].c_str(), false);
-	std::cout << params["config"] << std::endl;
+    TextReader<size_t> config_reader(params["config"].c_str(), false); //\brief Read text data from file
+	std::cout << params["config"] << std::endl;//用于调试 
     config_reader.ReadAllLines();
     if (!config_reader.Lines().empty()) {
       for (auto& line : config_reader.Lines()) {
         // remove str after "#"
         if (line.size() > 0 && std::string::npos != line.find_first_of("#")) {
-          line.erase(line.find_first_of("#"));
+          line.erase(line.find_first_of("#"));//删除注释行
         }
-        line = Common::Trim(line);
+        line = Common::Trim(line);//删除没用的一些字符
 		//std::cout << line << std::endl;
         if (line.size() == 0) {
           continue;
         }
-        Config::KV2Map(params, line.c_str());
+        Config::KV2Map(params, line.c_str());//将config文件中的参数放到params中
       }
     } else {
       Log::Warning("Config file %s doesn't exist, will ignore",

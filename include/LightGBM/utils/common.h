@@ -31,7 +31,7 @@ inline static char tolower(char in) {
   return in;
 }
 
-inline static std::string Trim(std::string str) {
+inline static std::string Trim(std::string str) {//删除没用的一些字符
   if (str.empty()) {
     return str;
   }

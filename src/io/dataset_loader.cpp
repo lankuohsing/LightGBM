@@ -215,7 +215,9 @@ Dataset* DatasetLoader::LoadFromFile(const char* filename, const char* initscore
   dataset->metadata_.CheckOrPartition(num_global_data, used_data_indices);
   // need to check training data
   CheckDataset(dataset.get());
-  return dataset.release();
+  Dataset *dataset_release = dataset.release();
+  //return dataset.release();//Dataset*ÀàĞÍ
+  return dataset_release;
 }
 
 

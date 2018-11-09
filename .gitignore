@@ -391,3 +391,4 @@ python-package/lightgbm/VERSION.txt
 *.test
 *.query
 *.train
+*.xlsx
