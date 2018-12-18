@@ -2,7 +2,7 @@
 """
 Created on Tue Sep  4 21:08:54 2018
 
-@author: l00467141
+@author: lankuohsing
 """
 
 # In[]
